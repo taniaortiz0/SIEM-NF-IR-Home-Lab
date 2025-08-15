@@ -46,11 +46,48 @@ As I started this, I went to my localhost of Splunk Enterprise:
 
 <img width="1487" height="322" alt="splunk enterprise" src="https://github.com/user-attachments/assets/fd309976-f047-4ea8-a0e8-89ebc3969ec3" />
 
-From there, I will be heading to the GitHub repository to get sample data from Splunk BOSS of the SOC version 3.
+From there, I will be heading to the GitHub repository to get sample data from Splunk BOSS of the SOC version 3. Once I am there, I've downloaded their data set and started to decompress the file:
 
+```tar -xvzf <botsv3_dataset.tgz>```
 
+I am moving the data set to a different path:
+
+```mv botsv3_data_set /opt/splunk/etc/apps```
+
+```sudo !!```
+
+Now, I just do the same proceed to start Splunk and logged in. I go to Settings > Server Controls > Restart Splunk.
+
+Once the action is done, now it's time for the data set to pop up. Go ahead and go to App > Manage Apps > Enable the data set.
+
+I went to the Apps > Search & Reporting and started to do my Splunk Searches. I followed the GitHub Repository (botsv3) which linked below on the References section.
 
 ## REMNux
+
+I went ahead and turned on my cloned Ubuntu machine. Now, I am going to pull REMNux from their site to start up the installation.
+
+```wget https://REMnux.org/remnux-cli```
+
+Once that is done, I started to move it and to modify permissions:
+
+```mv remnux-cli remnux```
+
+```sudo chmod +x remnux```
+
+```sudo mv remnux /usr/local/bin```
+
+Installing curl to gather dependencies:
+
+```sudo apt install -y gnupg curl```
+
+Downloading a Virtual Appliance File using the General OVA from the REMNux official site:
+
+<img width="3086" height="1767" alt="REMNux" src="https://github.com/user-attachments/assets/0b1e6444-b3d2-47bd-b359-66bd98720d2b" />
+
+```powershell
+Get-FileHash -Algorithm SHA256 .\remnux-v7-focal.ova
+```
+
 
 
 ## Windows 11 (Cloudflare Flare VM)
