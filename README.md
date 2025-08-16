@@ -1,4 +1,4 @@
-# SIEM Network Forensics and Incident Response Home Lab (work-in-progress)
+# SIEM Network Forensics and Incident Response Home Lab
 
 ## 📝 Objective
 
@@ -17,13 +17,11 @@ ___
 
 ___
 
-## Ubuntu (Splunk + REMNux)
+## Ubuntu (Splunk)
 
 I started installing Ubuntu and named it after the latest version along with it is a clean slate. This will be the core of the isolation and I will install on top of the Ubuntu image an instance of Splunk for log arregation and analysis.
 
-Similarily to this process, I am going to utilize another Ubuntu VM (full clone) to setup a Reverse Engineering Malware Analysis image using REMNux.
-
-Before getting started, update and upgrade the Ubuntu machine: 
+Before getting started, I update and upgrade the Ubuntu machine: 
 
 <pre>sudo apt update && sudo apt upgrade</pre>
 
@@ -88,13 +86,70 @@ Downloading a Virtual Appliance File using the General OVA from the REMNux offic
 Get-FileHash -Algorithm SHA256 .\remnux-v7-focal.ova
 ```
 
+Once I am at my REMNux, I will upgrade it:
+
+```remnux upgrade```
+
+As the upgrade has finished, I am going to take a snapshot of the vm resembling a clean slate.
+
+<img width="3477" height="1696" alt="REMNux2" src="https://github.com/user-attachments/assets/564f5ec2-e94a-4b42-9d1f-5b1acd32520b" />
 
 
-## Windows 11 (Cloudflare Flare VM)
+## Windows 11 (Flare VM)
 
-I will be setting up a Windows 11 VM to create a Forensics Reverse Engineering toolkit such as Flare VM.
+I will be setting up a Windows 11 VM to install Flare VM. Set the Network Adapter to VMNet0 so, we can have an isolated environment and being able to have a sandbox type feeling.
 
-____
+Press Shift+fn+10 to bypass Windows connection to the network and enter the following command:
+
+```OOBE\BYPASSNRO```
+
+<img width="956" height="515" alt="connection2" src="https://github.com/user-attachments/assets/9f426508-8a20-4c6b-a791-53f789f13a09" />
+
+
+As I bypassed of not setting up the network, I restarted my Windows 11 VM and followed the procedures to install Flare VM:
+
+Windows Defender needs to be removed:
+
+So, I went to a GitHub repository and downloaded the Windows Defender Remover on the Releases page. I ran the executable file to remove Defender completely.
+
+Once I have done that, I created a snapshot as a Pre-ToolKit.
+
+<img width="1490" height="1426" alt="Pre-ToolKit" src="https://github.com/user-attachments/assets/0661ae19-10b8-4627-9c2b-87b9073f5d36" />
+
+I went ahead and opened Windows PowerShell as an Administrator.
+
+I ran the following commands:
+
+```powershell
+Get-ExecutionPolicy
+```
+
+```powershell
+Set-ExecutionPolicy Unrestricted -Force
+```
+
+FLARE-VM Installation
+
+```powershell
+(New-Objectnet.webclient).DownloadFile('https://raw.githubusercontent.com/mandiant/flare-vm/main/install.ps1',"$([Environment]::GetFolderPath("Desktop"))\install.ps1")
+```
+
+```powershell
+cd .\Desktop\
+```
+
+```powershell
+.\install.ps1
+```
+
+Once FlareVM has installed, I am able to see this wonderful background on my Windows 11 VM:
+
+<img width="1580" height="1393" alt="Flare VM" src="https://github.com/user-attachments/assets/cde8a360-9fd1-4942-9c0c-42e499bbbb02" />
+
+
+## Future Improvements
+
+I plan to utilize this lab to conduct more SIEM, network forensics, and malware analysis activities.
 
 ___
 
@@ -103,6 +158,8 @@ ___
 [Hack The Box - Building a defense lab](https://youtu.be/eWQ99r4zZ-8?si=9BkSeDD1CRhMuIDt)
 
 [GitHub - Boss of the SOC (BOTS) Dataset Version 3](https://github.com/splunk/botsv3)
+
+[GitHub - Windows Defender Remover](https://github.com/ionuttbara/windows-defender-remover)
 
 [Splunk Download](https://www.splunk.com/en_us/download.html)
 
