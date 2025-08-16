@@ -17,7 +17,7 @@ ___
 
 ___
 
-## Ubuntu (Splunk)
+## Ubuntu
 
 I started installing Ubuntu and named it after the latest version along with it is a clean slate. This will be the core of the isolation and I will install on top of the Ubuntu image an instance of Splunk for log arregation and analysis.
 
